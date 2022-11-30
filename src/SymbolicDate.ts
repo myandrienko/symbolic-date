@@ -18,8 +18,10 @@ export class SymbolicDate {
       typeof maybeMonthIndex === "undefined" &&
       typeof maybeDay === "undefined"
     ) {
-      this.date = new Date();
-      this.date.setUTCHours(0, 0, 0, 0);
+      const today = new Date();
+      this.date = new Date(
+        Date.UTC(today.getFullYear(), today.getMonth(), today.getDate())
+      );
       return this;
     }
 

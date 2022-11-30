@@ -12,7 +12,7 @@ beforeAll(() => {
 
 describe("core", () => {
   it("constructs current date", () => {
-    vi.setSystemTime(new Date(Date.UTC(2022, 11, 1, 1, 0, 0, 0)));
+    vi.setSystemTime(new Date(Date.UTC(2022, 10, 30, 23, 0, 0, 0)));
     const date = new SymbolicDate();
     expect(date.toUTCString()).toBe("2022-12-01");
   });
