@@ -14,12 +14,12 @@ describe("core", () => {
   it("constructs current date", () => {
     vi.setSystemTime(new Date(Date.UTC(2022, 10, 30, 23, 0, 0, 0)));
     const date = new SymbolicDate();
-    expect(date.toUTCString()).toBe("2022-12-01");
+    expect(date.toISOString()).toBe("2022-12-01");
   });
 
   it("constructs date from ISO string", () => {
     const date = new SymbolicDate("2022-12-01");
-    expect(date.toUTCString()).toBe("2022-12-01");
+    expect(date.toISOString()).toBe("2022-12-01");
   });
 
   it("constructs invalid date from invalid ISO date string", () => {
@@ -29,26 +29,26 @@ describe("core", () => {
 
   it("constructs date from parts", () => {
     const date = new SymbolicDate(2022, 11, 1);
-    expect(date.toUTCString()).toBe("2022-12-01");
+    expect(date.toISOString()).toBe("2022-12-01");
   });
 
   it("can reinterpret Date in local timezone", () => {
     const date = SymbolicDate.fromLocalDate(new Date(2022, 11, 1, 1, 0, 0, 0));
-    expect(date.toUTCString()).toBe("2022-12-01");
+    expect(date.toISOString()).toBe("2022-12-01");
   });
 
   it("can reinterpret Date in UTC", () => {
     const date = SymbolicDate.fromUTCDate(
       new Date(Date.UTC(2022, 11, 1, 1, 0, 0, 0))
     );
-    expect(date.toUTCString()).toBe("2022-12-01");
+    expect(date.toISOString()).toBe("2022-12-01");
   });
 
   it("allows date manipulation", () => {
     const date = new SymbolicDate("2022-12-01");
     date.setDate(date.getDate() - 1);
     date.setFullYear(1970);
-    expect(date.toUTCString()).toBe("1970-11-30");
+    expect(date.toISOString()).toBe("1970-11-30");
   });
 
   it("converts to local midnight", () => {

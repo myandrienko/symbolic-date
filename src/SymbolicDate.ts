@@ -121,7 +121,7 @@ export class SymbolicDate {
     return this.date.toLocaleDateString(locales, options);
   }
 
-  toUTCString(): string {
+  toISOString(): string {
     return this.date.toISOString().substring(0, isoDateLength);
   }
 
@@ -134,7 +134,7 @@ export class SymbolicDate {
   }
 
   toJSON(): string {
-    return this.toUTCString();
+    return this.toISOString();
   }
 }
 
