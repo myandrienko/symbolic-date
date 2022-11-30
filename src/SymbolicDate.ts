@@ -18,11 +18,7 @@ export class SymbolicDate {
       typeof maybeMonthIndex === "undefined" &&
       typeof maybeDay === "undefined"
     ) {
-      const today = new Date();
-      this.date = new Date(
-        Date.UTC(today.getFullYear(), today.getMonth(), today.getDate())
-      );
-      return this;
+      return SymbolicDate.fromLocalDate(new Date());
     }
 
     if (
@@ -87,25 +83,21 @@ export class SymbolicDate {
   }
 
   setMonth(monthIndex: number, date?: number): SymbolicDate {
-    this.date.setUTCMonth(monthIndex, date ?? this.date.getUTCDate());
+    this.date.setUTCMonth(monthIndex, date ?? this.getDate());
     return this;
   }
 
   setFullYear(year: number, monthIndex?: number, date?: number): SymbolicDate {
     this.date.setUTCFullYear(
       year,
-      monthIndex ?? this.date.getUTCMonth(),
-      date ?? this.date.getUTCDate()
+      monthIndex ?? this.getMonth(),
+      date ?? this.getDate()
     );
     return this;
   }
 
   asLocalMidnight(): Date {
-    return new Date(
-      this.date.getUTCFullYear(),
-      this.date.getUTCMonth(),
-      this.date.getUTCDate()
-    );
+    return new Date(this.getFullYear(), this.getMonth(), this.getDate());
   }
 
   asUTCMidnight(): Date {
@@ -146,7 +138,7 @@ export class SymbolicDate {
   }
 }
 
-export function reviveSymbolicDate(key: string, value: unknown): unknown {
+export function reviveSymbolicDate(_key: string, value: unknown): unknown {
   if (typeof value === "string") {
     const maybeValidDate = new SymbolicDate(value);
     if (!Number.isNaN(+maybeValidDate)) {
