@@ -50,6 +50,16 @@ describe("core", () => {
     date.setFullYear(1970);
     expect(date.toUTCString()).toBe("1970-11-30");
   });
+
+  it("converts to local midnight", () => {
+    const date = new SymbolicDate("2022-12-01");
+    expect(+date.asLocalMidnight()).toBe(+new Date(2022, 11, 1));
+  });
+
+  it("converts to UTC midnight", () => {
+    const date = new SymbolicDate("2022-12-01");
+    expect(+date.asUTCMidnight()).toBe(Date.UTC(2022, 11, 1));
+  });
 });
 
 describe("JSON", () => {

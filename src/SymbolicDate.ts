@@ -100,6 +100,18 @@ export class SymbolicDate {
     return this;
   }
 
+  asLocalMidnight(): Date {
+    return new Date(
+      this.date.getUTCFullYear(),
+      this.date.getUTCMonth(),
+      this.date.getUTCDate()
+    );
+  }
+
+  asUTCMidnight(): Date {
+    return new Date(this.date);
+  }
+
   toString(): string {
     return this.date.toDateString();
   }
